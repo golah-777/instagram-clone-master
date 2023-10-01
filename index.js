@@ -39,6 +39,7 @@
       // Initialize Firebase
       this.app = initializeApp(firebaseConfig);
       this.auth = getAuth();
+      this.provider = new GoogleAuthProvider();
       
       this.userAuth();
       this.addEventListeners();
@@ -94,7 +95,7 @@
       })
 
       this.googleIn.addEventListener('click',()=>{
-        signInWithPopup(this.auth, provider)
+        signInWithPopup(this.auth, this.provider)
         .then((result) => {
           // This gives you a Google Access Token. You can use it to access the Google API.
           const credential = GoogleAuthProvider.credentialFromResult(result);
