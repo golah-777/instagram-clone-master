@@ -8,9 +8,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    padding-bottom: 15px;
   }
   
-  .email, .password{
+  .email, .password, .usernames, .surname{
     padding: 5.5px;
     width: 250px;
     border: 1px solid #dbdbdb;
@@ -104,7 +105,6 @@
 
  .log-out{
   color: #0095f6;
-  margin-right: 45px;
   font-size: 14px;
   cursor: pointer;
  }
@@ -207,20 +207,220 @@
     margin-left: 14px;
 }
 
+aside{
+ padding: 8px 12px 20px 12px;
+ display: flex;
+ flex-direction: column;
+ /* width: 220px; */
+ border: 0px solid #d4d4d4;
+ border-right-width: .7px;
+}
+
+.instagram-logo-mobile{
+    display: none;
+}
+
+.instagram-logo{
+    padding: 25px 12px 16px 12px;
+}
+
+.option{
+    padding: 12px;
+    margin: 4px 0px;
+    width: 220px;
+    border-radius: 9px;
+    transition: 0.3s;
+}
+
+.option:hover{
+    background-color: #efefef;
+}
+
+.inner-optin{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.inner-optin span, strong{
+   margin-left: 10px;
+}
+
+#span{
+    margin-left: 0px;
+}
+
+.bottom-option{
+    position: relative;
+    top:55px;
+}
+.user-log-out{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
 main {
-    height: calc(100vh - 54px);
+    height: calc(100vh);
     background-color: #fafafa;
     display: flex;
-    justify-content: center;
+   flex-direction: row;
+   /* flex: 1; */
+    /* justify-content: center; */
+    width: 100vw;
+}
+
+.inner-main-contant-side{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: relative;
+    left: 20%;
+    transform:translate(-20%,0%);
 }
 
 .content-container {
-   padding-top: 30px;
-   width: 935px;
-   height: 100%;
+   /* padding-top: 30px; */
+   /* width: 935px; */
+   height: 100vh;
    display: flex;
    overflow: hidden;
+   width: 100%;
 }
+
+.background-image-modal, .background-image-modal-edit{
+    position: absolute;
+    left: 50%;
+    top: 50%; 
+    transform: translate(-50%,-50%);
+    z-index: 1;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0,0,0.6);
+    display: none;
+}
+
+
+#update-delate{
+    position: absolute;
+    left: 50%;
+    top: 50%; 
+    transform: translate(-50%,-50%);
+    z-index: 1;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0,0,0.6);
+    display: none;
+}
+
+.display{
+    display: none;
+}
+
+.modal-div{
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 320px;
+    /* padding: 0px 15px; */
+    border-radius: 9px;
+}
+
+#update-delate-div{
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 320px;
+    /* padding: 0px 15px; */
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-delete-options{
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between; */
+    /* padding: 5px 0px; */
+    text-align: center;
+    /* margin-bottom: 5px; */
+    border: 0px solid#d4d4d4;
+    border-bottom-width: 0.7px;
+    padding:8px 15px; 
+    font-weight: 500;
+}
+
+nav{
+    display: none;
+}
+
+.modal-head{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* padding: 5px 0px; */
+    margin-bottom: 5px;
+    border: 0px solid#d4d4d4;
+    border-bottom-width: 0.7px;
+    padding:8px 15px; 
+}
+
+.modal-contents{
+    padding:0px 15px; 
+}
+
+.caption-post, .caption-post-eidt{
+   margin-top: 10px;
+   width: 100%;
+   height: 35px;
+   border: 0;
+}
+
+
+.modal-head svg{
+    fill: #262626;
+    color: #262626;
+    cursor: pointer;
+}
+
+.modal-head .share{
+    color: #0095f6;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#fileInput{
+    height: 2px;
+    visibility: hidden;
+}
+
+#selectImageButton{
+    background-color: #0095f6;
+    color: #fafafa;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 4px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0%);
+    border: 0;
+    margin-top: 10px;
+}
+  
 
 .content {
     margin: 0 28px 0 0;
@@ -389,7 +589,7 @@ main {
 .profile-details {
     display: flex;
     align-items: center;
-    margin: 18px 0 10px 0;
+    margin: 70px 0 10px 0;
     padding: 10px;
 
 }
@@ -459,3 +659,4 @@ main {
 .body img {
     width: 100%;
 }
+
