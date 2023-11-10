@@ -55,7 +55,7 @@ class App{
     // this.provider = new GoogleAuthProvider();
     this.userAuth();
 
-    this.userId = "";
+    
 
     this.db = getFirestore(this.app);
     //<-----------AUTH END--------------->
@@ -81,18 +81,29 @@ class App{
     this.edit = document.querySelector('.edit');
     this.captionEdit = document.querySelector('.caption-post-eidt');
     this.closeModalEdit = document.querySelector('.close-modal-edit');
-
+     
+   
     this.id = '';
+    this.userId = "";
+    // this.posts = JSON.parse(localStorage.getItem('posts')) || [];
+    this.posts = [];
 
-    this.posts = JSON.parse(localStorage.getItem('posts')) || [];
+    this.userName = document.querySelector('.usernames');
+    this.name = document.querySelector('.name');
+    this.surname= document.querySelector('.surname');
+
+    this.$userName = '';
+    this.$name = '';
+    this.$surname='';
+
     this.addEventListeners();
-    //  this.updatePost()
     this.readPostFirestore();
+    // this.readPost()
   }
 
   addEventListeners(){
    // <--------AUTH START ------------>
- 
+   
    this.logIn.addEventListener('click',()=>{
     const email = this.email.value;
     const password = this.password.value;
@@ -191,7 +202,8 @@ class App{
     });
 
   }
-  
+
+
   openModalEdit(event){
 
    const options = event.target.closest('.options');
@@ -250,7 +262,7 @@ class App{
     if(editPost){
       this.updatePost();
       this.modalEdit.style.display='none';
-
+      this.readPostFirestore();
     }
 
     if(close){
@@ -266,43 +278,74 @@ class App{
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
-
-        this.userId = uid
+        this.userId = uid;  
         // ...
         this.body.style.display = 'inline';
         this.form.style.display = 'none';
         // console.log('nice')
-        console.log(this.userId)
+        // console.log(this.userId, this.userIds)
+        this.userInfo();
+        this.readPostFirestore(user.uid)
       } else {
         // User is signed out
         // ...
         // console.log('bad')
         this.body.style.display = 'none';
         this.form.style.display = 'inline';
+        this.$posts.innerHTML = '';
       }
     });
 
   }
   // <-----------AUTH ONSTATE------------>
 
+  userInfo(){
+    // this.$name = this.name.value;
+    // this.$surname = this.surname.value;
+    // this.$userName = this.userName.value;
+
+    // console.log(this.$name, this.$surname, this.$userName)
+  }
   createPosts(){
     const details = {
       id: cuid(),
       caption:this.caption.value ,
-      img: this.imgId, 
+      img: this.imgId,
     }
 
     this.posts.push(details); // this.posts = [...this.posts, details]
 
     // Add a new document in collection "cities"
     setDoc(doc(this.db, "users", this.userId), {
-      posts: this.posts,
+      posts: this.posts
     });
 
     // localStorage.setItem('posts', JSON.stringify(this.posts));
-    // this.$posts.innerHTML = '';
-    // // this.readPost();
+    this.$posts.innerHTML = '';
+    this.readPost();
+    // this.readPostFirestore();
   }
+
+  async readPostFirestore(value){
+    const id = value
+    const docRef = doc(this.db, "users", id);
+    const docSnap =  await getDoc(docRef);
+    
+      if (docSnap.exists()) {
+        console.log(id, "Document data:", docSnap.data());
+        this.$posts.innerHTML = '';
+        this.posts = docSnap.data().posts
+        this.readPost();
+      } else {
+        this.posts = [];
+        setDoc(doc(this.db, "users", id), {
+          posts: this.posts
+        });
+        // docSnap.data() will be undefined in this case
+        console.log(id, "No such document!");
+      }
+  }
+
 
   readPost(){
     this.$posts.innerHTML += this.posts.map((item) =>`
@@ -453,14 +496,6 @@ class App{
     
   }
 
-  readPostFirestore(){
-    const querySnapshot= getDocs(collection(this.db, "users"));
-    querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    console.log(doc.id, " => ", doc.data());
-    })
-  }
-
 
   updatePost(){
     // this.captionEdit.value = this.$posts.querySelector('.caption-text').innerText;
@@ -485,8 +520,9 @@ class App{
     // });
      
     // localStorage.setItem('posts', JSON.stringify(this.posts));
-    // this.$posts.innerHTML = '';
-    // this.readPost();
+    this.$posts.innerHTML = '';
+    this.readPost();
+    // this.readPostFirestore();
 
   }
 
@@ -498,10 +534,12 @@ class App{
     });
 
     // localStorage.setItem('posts', JSON.stringify(this.posts));
-    // this.$posts.innerHTML = '';
-    // this.readPost();
+    this.$posts.innerHTML = '';
+    this.readPost();
+    // this.readPostFirestore();
   }
 
+ 
 }
 
 app = new App();
