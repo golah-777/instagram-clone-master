@@ -88,13 +88,17 @@ class App{
     // this.posts = JSON.parse(localStorage.getItem('posts')) || [];
     this.posts = [];
 
-    this.userName = document.querySelector('.usernames');
-    this.name = document.querySelector('.name');
-    this.surname= document.querySelector('.surname');
+    // this.userName = document.querySelector('.usernames');
+    // this.name = document.querySelector('.names');
+    // this.surname= document.querySelector('.surname');
 
-    this.$userName = '';
-    this.$name = '';
-    this.$surname='';
+    // this.username= document.querySelector('.username');
+    // this.naMe= document.querySelector('.name');
+    // this.surnaMe= document.querySelector('.surnames');
+
+    // this.$userName = '';
+    // this.$name = '';
+    // this.$surname='';
 
     this.addEventListeners();
     this.readPostFirestore();
@@ -284,7 +288,7 @@ class App{
         this.form.style.display = 'none';
         // console.log('nice')
         // console.log(this.userId, this.userIds)
-        this.userInfo();
+        // this.userInfo();
         this.readPostFirestore(user.uid)
       } else {
         // User is signed out
@@ -299,13 +303,15 @@ class App{
   }
   // <-----------AUTH ONSTATE------------>
 
-  userInfo(){
-    // this.$name = this.name.value;
-    // this.$surname = this.surname.value;
-    // this.$userName = this.userName.value;
+  // userInfo(){
+  //   this.$name = this.name.value;
+  //   this.$surname = this.surname.value;
+  //   this.$userName = this.userName.value;
 
-    // console.log(this.$name, this.$surname, this.$userName)
-  }
+  //   this.username.innerHTML = this.$userName
+  //   this.naMe.innerHTML = this.$name
+  //   this.surnaMe.innerHTML = this.$surname
+  // }
   createPosts(){
     const details = {
       id: cuid(),
