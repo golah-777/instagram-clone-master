@@ -256,7 +256,7 @@ class App{
           // item.caption = this.captionEdit.value;
           // this.captionEdit.value = '';
 
-          console.log(item.caption, this.id)
+          // console.log(item.caption, this.id)
         }
       
       })
@@ -338,7 +338,7 @@ class App{
     const docSnap =  await getDoc(docRef);
     
       if (docSnap.exists()) {
-        console.log(id, "Document data:", docSnap.data());
+        // console.log(id, "Document data:", docSnap.data());
         this.$posts.innerHTML = '';
         this.posts = docSnap.data().posts
         this.readPost();
@@ -348,7 +348,7 @@ class App{
           posts: this.posts
         });
         // docSnap.data() will be undefined in this case
-        console.log(id, "No such document!");
+        // console.log(id, "No such document!");
       }
   }
 
